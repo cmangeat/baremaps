@@ -59,26 +59,6 @@
 
   <dependencies>
     <dependency>
-      <groupId>io.servicetalk</groupId>
-      <artifactId>servicetalk-data-jackson</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.servicetalk</groupId>
-      <artifactId>servicetalk-data-jackson-jersey</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.servicetalk</groupId>
-      <artifactId>servicetalk-http-netty</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.servicetalk</groupId>
-      <artifactId>servicetalk-transport-netty</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.servicetalk</groupId>
-      <artifactId>servicetalk-http-router-jersey</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.glassfish.jersey.media</groupId>
       <artifactId>jersey-media-multipart</artifactId>
     </dependency>
@@ -95,8 +75,16 @@
       <artifactId>jersey-server</artifactId>
     </dependency>
     <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+    </dependency>
+    <dependency>
       <groupId>io.swagger</groupId>
       <artifactId>swagger-annotations</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.swagger</groupId>
+      <artifactId>swagger-jersey2-jaxrs</artifactId>
     </dependency>
     <dependency>
       <groupId>javax.validation</groupId>

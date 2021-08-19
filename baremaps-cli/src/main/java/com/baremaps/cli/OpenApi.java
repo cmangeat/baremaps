@@ -14,7 +14,13 @@
 
 package com.baremaps.cli;
 
-import com.baremaps.openapi.services.*;
+import com.baremaps.openapi.services.CollectionsService;
+import com.baremaps.openapi.services.ConformanceService;
+import com.baremaps.openapi.services.RedocResource;
+import com.baremaps.openapi.services.RootService;
+import com.baremaps.openapi.services.StylesService;
+import com.baremaps.openapi.services.SwaggerResource;
+import com.baremaps.openapi.services.TilesetsService;
 import com.baremaps.postgres.jdbc.PostgresUtils;
 import com.baremaps.server.CorsFilter;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -23,12 +29,14 @@ import io.servicetalk.http.api.BlockingStreamingHttpService;
 import io.servicetalk.http.netty.HttpServers;
 import io.servicetalk.http.router.jersey.HttpJerseyRouterBuilder;
 import io.servicetalk.transport.api.ServerContext;
+import io.swagger.jaxrs.config.BeanConfig;
+import io.swagger.jaxrs.listing.ApiListingResource;
+import io.swagger.jaxrs.listing.SwaggerSerializers;
 import java.util.concurrent.Callable;
 import javax.sql.DataSource;
 import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
-import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.jackson2.Jackson2Config;
@@ -71,13 +79,24 @@ public class OpenApi implements Callable<Integer> {
     mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
     jdbi.getConfig(Jackson2Config.class).setMapper(mapper);
 
+    BeanConfig beanConfig = new BeanConfig();
+    beanConfig.setVersion("1.0.0");
+    beanConfig.setSchemes(new String[]{"http"});
+    beanConfig.setHost("localhost:9000");
+    beanConfig.setBasePath("/");
+    beanConfig.setResourcePackage("com.baremaps.openapi.services");
+    beanConfig.setScan(true);
+
     // Initialize the application
     ResourceConfig application =
         new ResourceConfig()
             .packages("org.glassfish.jersey.examples.jackson")
             .registerClasses(
+                ApiListingResource.class,
+                SwaggerSerializers.class,
                 MyObjectMapperProvider.class,
-                JacksonFeature.class,
+                RedocResource.class,
+                SwaggerResource.class,
                 RootService.class,
                 CorsFilter.class,
                 ConformanceService.class,
