@@ -14,6 +14,7 @@
 
 package com.baremaps.cli;
 
+import com.baremaps.openapi.services.ApiListingResource;
 import com.baremaps.openapi.services.CollectionsService;
 import com.baremaps.openapi.services.ConformanceService;
 import com.baremaps.openapi.services.RedocResource;
@@ -29,8 +30,6 @@ import io.servicetalk.http.api.BlockingStreamingHttpService;
 import io.servicetalk.http.netty.HttpServers;
 import io.servicetalk.http.router.jersey.HttpJerseyRouterBuilder;
 import io.servicetalk.transport.api.ServerContext;
-import io.swagger.jaxrs.config.BeanConfig;
-import io.swagger.jaxrs.listing.ApiListingResource;
 import io.swagger.jaxrs.listing.SwaggerSerializers;
 import java.util.concurrent.Callable;
 import javax.sql.DataSource;
@@ -78,14 +77,6 @@ public class OpenApi implements Callable<Integer> {
     ObjectMapper mapper = new ObjectMapper();
     mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
     jdbi.getConfig(Jackson2Config.class).setMapper(mapper);
-
-    BeanConfig beanConfig = new BeanConfig();
-    beanConfig.setVersion("1.0.0");
-    beanConfig.setSchemes(new String[]{"http"});
-    beanConfig.setHost("localhost:9000");
-    beanConfig.setBasePath("/");
-    beanConfig.setResourcePackage("com.baremaps.openapi.services");
-    beanConfig.setScan(true);
 
     // Initialize the application
     ResourceConfig application =
