@@ -36,6 +36,7 @@ import javax.sql.DataSource;
 import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
+import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.jackson2.Jackson2Config;
@@ -86,6 +87,7 @@ public class OpenApi implements Callable<Integer> {
                 ApiListingResource.class,
                 SwaggerSerializers.class,
                 MyObjectMapperProvider.class,
+                JacksonFeature.class,
                 RedocResource.class,
                 SwaggerResource.class,
                 RootService.class,
