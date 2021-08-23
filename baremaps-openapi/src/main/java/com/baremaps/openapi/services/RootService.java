@@ -17,9 +17,15 @@ package com.baremaps.openapi.services;
 import com.baremaps.api.DefaultApi;
 import com.baremaps.model.LandingPage;
 import com.baremaps.model.Link;
+
+import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 public class RootService implements DefaultApi {
+
+  @Context
+  ContainerRequestContext crc;
 
   @Override
   public Response getLandingPage() {
@@ -42,6 +48,8 @@ public class RootService implements DefaultApi {
     linkConformance.setHref(String.format("http://%s/conformance", address));
     linkConformance.setRel("application/json");
     landingPage.getLinks().add(linkConformance);
+
+    assert(crc.getProperty("test") == "mo");
 
     return Response.ok().entity(landingPage).build();
   }

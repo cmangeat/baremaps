@@ -20,6 +20,8 @@ import com.baremaps.postgres.jdbc.PostgresUtils;
 import com.baremaps.server.CorsFilter;
 import com.baremaps.server.EditorResources;
 import com.baremaps.server.MaputnikResources;
+import com.baremaps.openapi.TestFilter;
+
 import io.servicetalk.http.api.BlockingStreamingHttpService;
 import io.servicetalk.http.netty.HttpServers;
 import io.servicetalk.http.router.jersey.HttpJerseyRouterBuilder;
@@ -95,7 +97,8 @@ public class Edit implements Callable<Integer> {
                 JacksonFeature.class,
                 CorsFilter.class,
                 EditorResources.class,
-                MaputnikResources.class)
+                MaputnikResources.class,
+                TestFilter.class)
             .register(
                 new AbstractBinder() {
                   @Override
