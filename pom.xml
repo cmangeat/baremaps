@@ -69,7 +69,7 @@
     <version.lib.s3mock>2.1.28</version.lib.s3mock>
     <version.lib.selenium>3.141.59</version.lib.selenium>
     <version.lib.servicetalk>0.40.1</version.lib.servicetalk>
-    <version.lib.slf4j>1.7.30</version.lib.slf4j>
+    <version.lib.slf4j>1.7.32</version.lib.slf4j>
     <version.lib.sqlite>3.34.0</version.lib.sqlite>
     <version.lib.swagger>1.6.2</version.lib.swagger>
     <version.lib.testng>7.4.0</version.lib.testng>
@@ -93,7 +93,6 @@
 
   <modules>
     <module>baremaps-benchmarks</module>
-    <module>baremaps-config</module>
     <module>baremaps-cli</module>
     <module>baremaps-blob</module>
     <module>baremaps-blob-s3</module>
@@ -331,11 +330,6 @@
       </dependency>
       <dependency>
         <artifactId>baremaps-cli</artifactId>
-        <groupId>com.baremaps</groupId>
-        <version>${project.parent.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>baremaps-config</artifactId>
         <groupId>com.baremaps</groupId>
         <version>${project.parent.version}</version>
       </dependency>
